@@ -1934,6 +1934,236 @@ a.info-card:hover .info-value {
 
 
 
+/* ----- FLOATING SIDE NAVIGATION ----- */
+.side-nav {
+    position: fixed;
+    top: 50%;
+    right: 1.75rem;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.85rem 0.6rem;
+    background: rgba(26, 19, 31, 0.55);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border: 1px solid rgba(169, 139, 181, 0.2);
+    border-radius: 60px;
+    box-shadow:
+        0 20px 45px -18px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(169, 139, 181, 0.05) inset;
+    animation: navFadeIn 0.8s ease-out 0.4s both;
+}
+
+/* Each link */
+.side-nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: var(--color-5);
+    background: transparent;
+    border: 1px solid transparent;
+    transition:
+        color 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
+}
+
+/* Icon wrapper */
+.side-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.side-nav-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Label — hidden, slides out to the left on hover */
+.side-nav-label {
+    position: absolute;
+    right: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    white-space: nowrap;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(45, 34, 53, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(169, 139, 181, 0.35);
+    padding: 0.45rem 0.9rem;
+    border-radius: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.3s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Small arrow on the label */
+.side-nav-label::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid rgba(169, 139, 181, 0.35);
+    transition: border-left-color 0.3s ease;
+}
+
+/* Hover / focus states */
+.side-nav-link:hover,
+.side-nav-link:focus-visible {
+    color: #ffffff;
+    background: linear-gradient(145deg, rgba(138, 112, 150, 0.35), rgba(82, 66, 92, 0.5));
+    border-color: rgba(169, 139, 181, 0.55);
+    transform: scale(1.08);
+    box-shadow:
+        0 10px 24px -10px rgba(138, 112, 150, 0.75),
+        0 0 0 4px rgba(169, 139, 181, 0.08);
+    outline: none;
+}
+
+.side-nav-link:hover .side-nav-icon,
+.side-nav-link:focus-visible .side-nav-icon {
+    transform: scale(1.05);
+}
+
+.side-nav-link:hover .side-nav-label,
+.side-nav-link:focus-visible .side-nav-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Active section (set via JS) */
+.side-nav-link.active {
+    color: #ffffff;
+    background: linear-gradient(145deg, var(--color-accent), var(--color-5));
+    border-color: rgba(169, 139, 181, 0.8);
+    box-shadow:
+        0 10px 28px -8px rgba(169, 139, 181, 0.7),
+        0 0 0 4px rgba(169, 139, 181, 0.15);
+}
+
+.side-nav-link.active .side-nav-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    border-color: rgba(169, 139, 181, 0.6);
+}
+
+/* Animations */
+@keyframes navFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1100px) {
+    .side-nav {
+        right: 1rem;
+        padding: 0.7rem 0.5rem;
+        gap: 0.5rem;
+    }
+    .side-nav-link {
+        width: 42px;
+        height: 42px;
+    }
+    .side-nav-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* On small screens, collapse to a bottom-centered horizontal bar */
+@media (max-width: 700px) {
+    .side-nav {
+        top: auto;
+        bottom: 1rem;
+        right: 50%;
+        transform: translateX(50%);
+        flex-direction: row;
+        padding: 0.55rem 0.7rem;
+        gap: 0.35rem;
+        border-radius: 40px;
+        animation: navFadeInMobile 0.8s ease-out 0.4s both;
+    }
+
+    .side-nav-link {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Labels appear above on mobile */
+    .side-nav-label {
+        right: auto;
+        top: auto;
+        bottom: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+    }
+
+    .side-nav-label::after {
+        left: 50%;
+        top: 100%;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid rgba(169, 139, 181, 0.35);
+        border-bottom: none;
+    }
+
+    .side-nav-link:hover .side-nav-label,
+    .side-nav-link:focus-visible .side-nav-label,
+    .side-nav-link.active .side-nav-label {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes navFadeInMobile {
+    from {
+        opacity: 0;
+        transform: translateX(50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(50%) translateY(0);
+    }
+}
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -2407,6 +2637,69 @@ a.info-card:hover .info-value {
 
 
 
+
+<!-- FLOATING SIDE NAVIGATION -->
+<nav class="side-nav" aria-label="Section navigation">
+    <a href="#top" class="side-nav-link" data-label="Home">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+        </span>
+        <span class="side-nav-label">Home</span>
+    </a>
+
+    <a href="#projects" class="side-nav-link" data-label="Projects">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+        </span>
+        <span class="side-nav-label">Projects</span>
+    </a>
+
+    <a href="#services" class="side-nav-link" data-label="Services">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+        </span>
+        <span class="side-nav-label">Services</span>
+    </a>
+
+    <a href="#education" class="side-nav-link" data-label="Education">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+        </span>
+        <span class="side-nav-label">Education</span>
+    </a>
+
+    <a href="#contact" class="side-nav-link" data-label="Contact">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        </span>
+        <span class="side-nav-label">Contact</span>
+    </a>
+</nav>
+
+
+
+
+
+
+
+
+
 <!-- BACK TO TOP BUTTON -->
 <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <span class="btt-arrow">
@@ -2520,6 +2813,78 @@ a.info-card:hover .info-value {
 
     update();
 })();
+
+
+
+
+
+
+
+
+
+/* ----- SIDE NAV: active section highlighting + smooth scroll ----- */
+(function () {
+    const links = document.querySelectorAll('.side-nav-link');
+    if (!links.length) return;
+
+    const sections = Array.from(links).map(link => {
+        const id = link.getAttribute('href');
+        if (id === '#top') return { link, section: document.body };
+        return { link, section: document.querySelector(id) };
+    }).filter(item => item.section);
+
+    // Smooth scroll for anchor clicks
+    links.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#top') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const offset = 0;
+                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Highlight active section based on scroll position
+    function setActive() {
+        const scrollPos = window.scrollY + window.innerHeight * 0.35;
+        let current = sections[0];
+
+        sections.forEach(item => {
+            const sectionTop = item.section === document.body ? 0 : item.section.offsetTop;
+            if (scrollPos >= sectionTop) {
+                current = item;
+            }
+        });
+
+        links.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            window.requestAnimationFrame(function () {
+                setActive();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    setActive();
+})();
+
+
+
+
     </script>
 
 </body>
