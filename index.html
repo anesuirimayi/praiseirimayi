@@ -2340,6 +2340,386 @@ a.info-card:hover .info-value {
 
 
 
+
+/* ----- ABOUT SECTION ----- */
+.about {
+    position: relative;
+    padding: 7rem 3rem 6rem;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(82, 66, 92, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 85%, rgba(138, 112, 150, 0.14) 0%, transparent 55%),
+        var(--color-1);
+    overflow: hidden;
+}
+
+.about::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(169, 139, 181, 0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+    pointer-events: none;
+}
+
+.about-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.about .section-head {
+    text-align: center;
+    margin-bottom: 4.5rem;
+}
+
+.about .section-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: rgba(169, 139, 181, 0.1);
+    border: 1px solid rgba(169, 139, 181, 0.28);
+    padding: 0.4rem 1.1rem;
+    border-radius: 40px;
+    margin-bottom: 1.2rem;
+    backdrop-filter: blur(3px);
+}
+
+.about .section-title {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 8px 30px rgba(138, 112, 150, 0.25);
+}
+
+.about .section-title span {
+    background: linear-gradient(135deg, var(--color-5) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about .section-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text-soft);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid */
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* ---- LEFT: Image ---- */
+.about-image-wrap {
+    position: relative;
+    animation: aboutRise 0.8s ease-out both;
+}
+
+.about-image-frame {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(169, 139, 181, 0.3);
+    background: linear-gradient(160deg, rgba(45, 34, 53, 0.8), rgba(26, 19, 31, 0.9));
+    padding: 12px;
+    box-shadow:
+        0 40px 70px -25px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(169, 139, 181, 0.08) inset;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.5s ease;
+}
+
+.about-image-frame:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow:
+        0 50px 80px -25px rgba(0, 0, 0, 0.95),
+        0 0 60px -15px rgba(138, 112, 150, 0.4);
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    filter: saturate(1.05) contrast(1.02);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-image-frame:hover .about-img {
+    transform: scale(1.04);
+}
+
+.about-image-glow {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle at 70% 70%, rgba(169, 139, 181, 0.25) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Floating badge */
+.about-image-badge {
+    position: absolute;
+    bottom: 22px;
+    left: -18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.15rem;
+    background: linear-gradient(135deg, rgba(45, 34, 53, 0.95), rgba(26, 19, 31, 0.95));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(169, 139, 181, 0.45);
+    border-radius: 40px;
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
+    animation: badgeFloat 3.5s ease-in-out infinite;
+    z-index: 3;
+}
+
+.about-image-badge svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---- RIGHT: Text ---- */
+.about-text {
+    animation: aboutRise 0.8s ease-out 0.15s both;
+}
+
+.about-heading {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.about-heading span {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-para {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-soft);
+    margin-bottom: 1.15rem;
+}
+
+.about-para strong {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Purple note */
+.about-purple {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.1rem 1.3rem;
+    background: linear-gradient(135deg, rgba(138, 112, 150, 0.18), rgba(82, 66, 92, 0.22));
+    border: 1px solid rgba(169, 139, 181, 0.3);
+    border-radius: 16px;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--color-accent);
+    margin-top: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.about-purple svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-accent);
+}
+
+/* Facts */
+.about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+    padding: 1.3rem 1.4rem;
+    background: rgba(45, 34, 53, 0.35);
+    border: 1px solid rgba(169, 139, 181, 0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.fact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+.fact-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-5);
+    flex-shrink: 0;
+}
+
+/* Buttons */
+.about-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 40px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s ease,
+                filter 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease;
+}
+
+.about-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.about-btn.primary {
+    color: #0c080d;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-5) 100%);
+    border: 1px solid transparent;
+    box-shadow: 0 12px 28px -10px rgba(169, 139, 181, 0.6);
+}
+
+.about-btn.primary:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    box-shadow: 0 20px 38px -12px rgba(169, 139, 181, 0.85);
+}
+
+.about-btn.primary:hover svg {
+    transform: translateX(4px);
+}
+
+.about-btn.ghost {
+    color: var(--text-light);
+    background: transparent;
+    border: 1px solid rgba(169, 139, 181, 0.4);
+}
+
+.about-btn.ghost:hover {
+    transform: translateY(-3px);
+    color: #ffffff;
+    border-color: var(--color-accent);
+    background: rgba(169, 139, 181, 0.1);
+    box-shadow: 0 15px 30px -15px rgba(138, 112, 150, 0.6);
+}
+
+/* Animations */
+@keyframes aboutRise {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1000px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .about-image-wrap {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+    .about-image-badge {
+        left: 22px;
+    }
+}
+
+@media (max-width: 900px) {
+    .about {
+        padding: 5rem 1.75rem 4rem;
+    }
+    .about .section-head {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .about {
+        padding: 4rem 1.25rem 3.5rem;
+    }
+    .about-image-wrap {
+        max-width: 320px;
+    }
+    .about-image-badge {
+        bottom: 14px;
+        left: 14px;
+        font-size: 0.68rem;
+        padding: 0.55rem 0.9rem;
+    }
+    .about-para {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+    .about-cta {
+        flex-direction: column;
+    }
+    .about-btn {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
+
     </style>
 </head>
 <body>
@@ -2698,6 +3078,118 @@ a.info-card:hover .info-value {
 
 
 
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+    <div class="about-inner">
+
+        <div class="section-head">
+            <span class="section-tag">Who I Am</span>
+            <h2 class="section-title">About <span>Me</span></h2>
+            <p class="section-sub">Developer. Creator. Storyteller through code and camera.</p>
+        </div>
+
+        <div class="about-grid">
+
+            <!-- LEFT: Image -->
+            <div class="about-image-wrap">
+                <div class="about-image-frame">
+                    <img src="images/praise.jpg" alt="Praise Anesu Irimayi — Web Developer based in Masvingo, Zimbabwe" class="about-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1587&auto=format&fit=crop';">
+                    <div class="about-image-glow"></div>
+                </div>
+                <div class="about-image-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <span>Web Developer</span>
+                </div>
+            </div>
+
+            <!-- RIGHT: Text -->
+            <div class="about-text">
+
+                <h3 class="about-heading">Hi, I'm <span>Praise</span> — I build for the web.</h3>
+
+                <p class="about-para">
+                    I'm a web developer and digital creator based in <strong>Masvingo, Zimbabwe</strong>. I hold
+                    Level 4 and Level 5 Diplomas in Computing and Information Systems from Pace College Harare,
+                    and I'm currently studying toward my Level 6.
+                </p>
+
+                <p class="about-para">
+                    My work spans both <strong>static and dynamic websites</strong> — from clean, fast marketing
+                    sites to full PHP &amp; MySQL platforms like <strong>To-Linka</strong>. I've delivered real
+                    client projects including schools, finance firms, and security companies — sites that are
+                    responsive, SEO-optimised, and built to perform.
+                </p>
+
+                <p class="about-para">
+                    Beyond the code, I'm an <strong>aspiring photographer</strong> — chasing light, framing
+                    moments, and learning to tell stories without a single line of code. It's a craft I'm
+                    actively growing, and one I plan to take seriously as I evolve as a creator.
+                </p>
+
+                <p class="about-para about-purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                    And yes — the purple you see everywhere? That's not an accident. Purple is my colour.
+                    It's in the design, the gradients, the glow. Consider it a signature.
+                </p>
+
+                <!-- Quick facts -->
+                <div class="about-facts">
+                    <div class="fact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>Masvingo, Zimbabwe</span>
+                    </div>
+                    <div class="fact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <span>Level 4 &amp; 5 Diploma · Level 6 in progress</span>
+                    </div>
+                    <div class="fact-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>Available for freelance work</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="about-cta">
+                    <a href="#contact" class="about-btn primary">
+                        <span>Let's Work Together</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#projects" class="about-btn ghost">
+                        <span>See My Work</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
 <!-- CONTACT SECTION -->
 <section class="contact" id="contact">
     <div class="contact-inner">
@@ -2857,6 +3349,18 @@ a.info-card:hover .info-value {
         <span class="side-nav-label">Education</span>
     </a>
 
+
+    <a href="#about" class="side-nav-link" data-label="About">
+        <span class="side-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </span>
+        <span class="side-nav-label">About</span>
+    </a>
+
+
     <a href="#contact" class="side-nav-link" data-label="Contact">
         <span class="side-nav-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
@@ -2867,7 +3371,6 @@ a.info-card:hover .info-value {
         <span class="side-nav-label">Contact</span>
     </a>
 </nav>
-
 
 
 
